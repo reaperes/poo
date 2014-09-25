@@ -13,6 +13,11 @@ var Game = function () {
   function render() {
   }
 
+  requestAnimationFrame(loop, canvas);
   function loop() {
+    clear();
+    update();
+    render();
+    requestAnimationFrame(loop, canvas);
   }
 };
