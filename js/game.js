@@ -9,6 +9,7 @@ Game = function () {
   };
 
   function update() {
+    poo.update();
   }
 
   function render() {
@@ -22,7 +23,7 @@ Game = function () {
   }
 
   this.run = loop;
-  function loop() {
+  function loop() {debugger;
     clear();
     update();
     render();

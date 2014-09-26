@@ -4,7 +4,12 @@ Poo = function () {
   var img = new Image();
   img.src = 'images/poo_27x23.png';
 
+  this.update = function () {
+    y += 10;
+    if (y > window.innerHeight) y = -23;
+  };
+
   this.render = function (context) {
-    context.drawImage(img, 0, 0);
+    context.drawImage(img, x, y);
   };
 };
