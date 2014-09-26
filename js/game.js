@@ -1,8 +1,9 @@
 Game = function () {
   var canvas = document.getElementById('canvas');
-  var ctx = canvas.getContext('2d');
+  var context = canvas.getContext('2d');
 
   var hero = new Character();
+  var poo = new Poo();
 
   this.init = function () {
   };
@@ -11,12 +12,13 @@ Game = function () {
   }
 
   function render() {
-    hero.render(ctx);
+    poo.render(context);
+    hero.render(context);
   }
 
   function clear() {
-    ctx.fillStyle = 'rgb(0, 0, 0)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = 'rgb(0, 0, 0)';
+    context.fillRect(0, 0, canvas.width, canvas.height);
   }
 
   this.run = loop;
