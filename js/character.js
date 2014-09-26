@@ -9,11 +9,14 @@ Character = function () {
     context.drawImage(img, x, window.innerHeight-28);
   };
 
-  this.onLeftKeyDown = function () {
-    x -= 10;
-  };
-
-  this.onRightKeyDown = function () {
-    x += 10;
+  this.move = function (direction) {
+    switch(direction) {
+      case 'left':
+        x -= 10;
+        break;
+      case 'right':
+        x += 10;
+        break;
+    }
   };
 };

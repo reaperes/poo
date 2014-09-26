@@ -10,14 +10,8 @@ Game = function () {
 
   function update() {
     poo.update();
-    if (leftKeyPressed ^ rightKeyPressed) {
-      if (leftKeyPressed) {
-        hero.onLeftKeyDown();
-      }
-      else {
-        hero.onRightKeyDown();
-      }
-    }
+    if (leftKeyPressed ^ rightKeyPressed)
+      leftKeyPressed ? hero.move('left') : hero.move('right');
   }
 
   function render() {
