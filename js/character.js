@@ -7,23 +7,27 @@ Character = function () {
   img.src = 'images/standing-mario_15x28.png';
 
   this.update = function () {
-    if (leftKeyPressed ^ rightKeyPressed)
-      leftKeyPressed ? move('left') : move('right');
+    move();
   };
 
   this.render = function (context) {
     context.drawImage(img, position, window.innerHeight-28);
   };
 
-  var move = function (direction) {
-    switch(direction) {
-      case 'left':
-        position -= 10;
-        break;
-      case 'right':
-        position += 10;
-        break;
+  var move = function () {
+    if (leftKeyPressed ^ rightKeyPressed) {
+      // apply acceleration
+      if (leftKeyPressed) acceleration = -0.2;
+      else acceleration = 0.2;
     }
+    else {
+      // apply friction
+      if (velocity > 0.6) acceleration = -0.4;
+      else if (velocity < -0.6) acceleration = 0.4;
+      else {acceleration = 0;velocity = 0;}
+    }
+    velocity += acceleration;
+    position += velocity;
   };
 
   /**
