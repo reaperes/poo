@@ -6,7 +6,10 @@ Poo = function () {
 
   this.update = function () {
     y += 10;
-    if (y > window.innerHeight) y = -23;
+    if (y > window.innerHeight) {
+      x = Math.floor(Math.random() * (window.innerWidth - 27));
+      y = -23;
+    }
   };
 
   this.render = function (context) {
