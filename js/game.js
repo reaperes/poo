@@ -10,8 +10,7 @@ Game = function () {
 
   function update() {
     poo.update();
-    if (leftKeyPressed ^ rightKeyPressed)
-      leftKeyPressed ? hero.move('left') : hero.move('right');
+    hero.update();
   }
 
   function render() {
@@ -32,33 +31,6 @@ Game = function () {
     requestAnimationFrame(loop, canvas);
   }
 
-  /**
-   * Key handler
-   */
-  var leftKeyPressed = false;
-  var rightKeyPressed = false;
-  function onKeyDown(event) {
-    switch(event.keyCode) {
-      case 37: // left
-        leftKeyPressed = true;
-        break;
-      case 39: // right
-        rightKeyPressed = true;
-        break;
-    }
-  }
-  
-  function onKeyUp(event) {
-    switch(event.keyCode) {
-      case 37: // left
-        leftKeyPressed = false;
-        break;
-      case 39: // right
-        rightKeyPressed = false;
-        break;
-    }    
-  }
-
-  window.addEventListener('keydown', onKeyDown, true);
-  window.addEventListener('keyup', onKeyUp, true);
+  window.addEventListener('keydown', hero.onKeyDown, true);
+  window.addEventListener('keyup', hero.onKeyUp, true);
 };
