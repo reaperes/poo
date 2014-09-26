@@ -10,6 +10,14 @@ Game = function () {
 
   function update() {
     poo.update();
+    if (leftKeyPressed ^ rightKeyPressed) {
+      if (leftKeyPressed) {
+        hero.onLeftKeyDown();
+      }
+      else {
+        hero.onRightKeyDown();
+      }
+    }
   }
 
   function render() {
@@ -23,7 +31,7 @@ Game = function () {
   }
 
   this.run = loop;
-  function loop() {debugger;
+  function loop() {
     clear();
     update();
     render();
@@ -33,16 +41,30 @@ Game = function () {
   /**
    * Key handler
    */
+  var leftKeyPressed = false;
+  var rightKeyPressed = false;
   function onKeyDown(event) {
     switch(event.keyCode) {
       case 37: // left
-        hero.onLeftKeyDown();
+        leftKeyPressed = true;
         break;
       case 39: // right
-        hero.onRightKeyDown();
+        rightKeyPressed = true;
         break;
     }
   }
+  
+  function onKeyUp(event) {
+    switch(event.keyCode) {
+      case 37: // left
+        leftKeyPressed = false;
+        break;
+      case 39: // right
+        rightKeyPressed = false;
+        break;
+    }    
+  }
 
   window.addEventListener('keydown', onKeyDown, true);
+  window.addEventListener('keyup', onKeyUp, true);
 };
