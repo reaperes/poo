@@ -27,8 +27,19 @@ Game = function () {
     requestAnimationFrame(loop, canvas);
   }
 
-  ;(function() {
-    function _onKeyDown() {console.error("'onKeyDown(event)' function is not defined.");}
-    window.addEventListener('keydown', typeof onKeyDown === 'function' ? onKeyDown : _onKeyDown, false);
-  })();
+  /**
+   * Key handler
+   */
+  function onKeyDown(event) {
+    switch(event.keyCode) {
+      case 37: // left
+        hero.onLeftKeyDown();
+        break;
+      case 39: // right
+        hero.onRightKeyDown();
+        break;
+    }
+  }
+
+  window.addEventListener('keydown', onKeyDown, true);
 };

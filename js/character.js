@@ -6,6 +6,14 @@ Character = function () {
   img.src = 'images/standing-mario.png';
 
   this.render = function (context) {
-    context.drawImage(img, 0, 0);
-  }
+    context.drawImage(img, x, y);
+  };
+
+  this.onLeftKeyDown = function () {
+    x -= 10;
+  };
+
+  this.onRightKeyDown = function () {
+    x += 10;
+  };
 };
