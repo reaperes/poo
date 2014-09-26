@@ -1,8 +1,10 @@
 Character = function () {
+  var _this = this;
+
   var life = 0;
   var acceleration = 0;
   var velocity = 0;
-  var position = 0;
+  this.x = 0;
   var img = new Image();
   img.src = 'images/standing-mario_15x28.png';
 
@@ -11,7 +13,7 @@ Character = function () {
   };
 
   this.render = function (context) {
-    context.drawImage(img, position, window.innerHeight-28);
+    context.drawImage(img, this.x, window.innerHeight-28);
   };
 
   var move = function () {
@@ -27,13 +29,13 @@ Character = function () {
       else {acceleration = 0;velocity = 0;}
     }
     velocity += acceleration;
-    position += velocity;
-    if (position < 0) {
-      position = velocity = acceleration = 0;
+    _this.x += velocity;
+    if (_this.x < 0) {
+      _this.x = velocity = acceleration = 0;
     }
-    if (position > window.innerWidth - 15) {
+    if (_this.x > window.innerWidth - 15) {
       velocity = acceleration = 0;
-      position = window.innerWidth - 15;
+      _this.x = window.innerWidth - 15;
     }
   };
 

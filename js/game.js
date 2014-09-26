@@ -9,6 +9,7 @@ Game = function () {
   for (var i=0; i<10; i++) {
     poos[i] = new Poo();
   }
+  var loopStop = false;
 
   this.init = function () {
   };
@@ -16,12 +17,34 @@ Game = function () {
   function update() {
     for (var i=0; i<poos.length; i++) poos[i].update();
     hero.update();
+    if (isCollision()) {
+      loopStop = true;
+    }
   }
 
   function render() {
     for (var i=0; i<poos.length; i++) poos[i].render(context);
     hero.render(context);
   }
+
+  /**
+   * Game functions
+   */
+
+  function isCollision() {
+    for (var i=0; i<poos.length; i++) {
+      if (poos[i].y + 23 < window.innerHeight - 27) continue;
+      if (poos[i].x + 27 < hero.x) continue;
+      if (hero.x + 15 < poos[i].x) continue;
+      console.log(poos[i].x + ' ' + hero.x);
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Render functions
+   */
 
   function clear() {
     context.fillStyle = 'rgb(0, 0, 0)';
@@ -42,6 +65,7 @@ Game = function () {
   }
 
   function loop() {
+    if (loopStop) return;
     clear();
     update();
     render();
@@ -49,6 +73,7 @@ Game = function () {
   }
 
   function debugLoop() {
+    if (loopStop) return;
     stats.begin();
     clear();
     update();
