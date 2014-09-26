@@ -28,6 +28,13 @@ Character = function () {
     }
     velocity += acceleration;
     position += velocity;
+    if (position < 0) {
+      position = velocity = acceleration = 0;
+    }
+    if (position > window.innerWidth - 15) {
+      velocity = acceleration = 0;
+      position = window.innerWidth - 15;
+    }
   };
 
   /**
