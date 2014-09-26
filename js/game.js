@@ -19,7 +19,7 @@ Game = function () {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
-  this.run = loop();
+  this.run = loop;
   function loop() {
     clear();
     update();
