@@ -3,18 +3,21 @@ Game = function () {
   var context = canvas.getContext('2d');
 
   var hero = new Character();
-  var poo = new Poo();
+  var poos = new Array(10);
+  for (var i=0; i<10; i++) {
+    poos[i] = new Poo();
+  }
 
   this.init = function () {
   };
 
   function update() {
-    poo.update();
+    for (var i=0; i<poos.length; i++) poos[i].update();
     hero.update();
   }
 
   function render() {
-    poo.render(context);
+    for (var i=0; i<poos.length; i++) poos[i].render(context);
     hero.render(context);
   }
 
