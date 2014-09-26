@@ -1,6 +1,6 @@
 Poo = function () {
-  var x = 0;
-  var y = 0;
+  var x = Math.floor(Math.random() * (window.innerWidth - 27));
+  var y = - Math.floor(Math.random() * 100) - 27;
   var img = new Image();
   img.src = 'images/poo_27x23.png';
 
@@ -8,7 +8,7 @@ Poo = function () {
     y += 10;
     if (y > window.innerHeight) {
       x = Math.floor(Math.random() * (window.innerWidth - 27));
-      y = -23;
+      y = - Math.floor(Math.random() * 100) - 27;
     }
   };
 
