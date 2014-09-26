@@ -1,4 +1,6 @@
 Game = function () {
+  var isDebug = true;
+
   var canvas = document.getElementById('canvas');
   var context = canvas.getContext('2d');
 
@@ -27,11 +29,32 @@ Game = function () {
   }
 
   this.run = loop;
+
+  if (isDebug) {
+    var stats = new Stats();
+    stats.setMode(0); // 0: fps, 1: ms
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.left = '0px';
+    stats.domElement.style.top = '0px';
+    document.body.appendChild(stats.domElement);
+
+    this.run = debugLoop;
+  }
+
   function loop() {
     clear();
     update();
     render();
     requestAnimationFrame(loop, canvas);
+  }
+
+  function debugLoop() {
+    stats.begin();
+    clear();
+    update();
+    render();
+    stats.end();
+    requestAnimationFrame(debugLoop, canvas);
   }
 
   window.addEventListener('keydown', hero.onKeyDown, true);
