@@ -11,8 +11,6 @@ Game = function () {
   }
   this.scoreboard = new Scoreboard();
 
-  var loopStop = false;
-
   this.init = function () {
   };
 
@@ -54,7 +52,7 @@ Game = function () {
   }
 
   this.run = loop;
-
+  var loopStop = false;
   if (isDebug) {
     var stats = new Stats();
     stats.setMode(0); // 0: fps, 1: ms
