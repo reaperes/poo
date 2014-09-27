@@ -1,6 +1,7 @@
 MAX_POO_COUNT = 30;
 
-SPEED = 10.0;
+SPEED_ORIGINAL = 10.0;
+SPEED = SPEED_ORIGINAL;
 
 Game = function () {
   var isDebug = true;

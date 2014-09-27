@@ -1,5 +1,6 @@
 Energy = function () {
   var energy = 0;
+  var usingEnergy = false;
   var divEnergyArr = [];
 
   var divEnergy = document.createElement('div');
@@ -12,21 +13,63 @@ Energy = function () {
   var divEnergyGraph = document.createElement('div');
   divEnergyGraph.style.cssText = 'position:relative;width:36px;height:100px;padding:4px;background-color:#68533D;';
 
-  for (var i=0; i<100; i++) {
-    var divEnergySpan = document.createElement('div');
-    divEnergySpan.style.cssText = 'background-color:#bfae86;width:100%;height:1px;float:left;visibility:hidden;';
-    divEnergyGraph.appendChild(divEnergySpan);
-    divEnergyArr.push(divEnergySpan);
-  }
+  var divEnergyBar = document.createElement('div');
+  divEnergyBar.id = 'energyForegroundBar';
+  divEnergyBar.style.cssText = 'position:absolute;bottom:4px;width:36px;height:0px;background-color:#bfae86';
+
+  divEnergyGraph.appendChild(divEnergyBar);
   divEnergy.appendChild(divEnergyText);
   divEnergy.appendChild(divEnergyGraph);
   document.body.appendChild(divEnergy);
 
+  this.render = function () {
+    divEnergyBar.style.height = energy + 'px';
+    divEnergyText.innerText = energy.toString();
+  };
+
   this.increase = function () {
-    debugger;
+    if (usingEnergy) return;
     energy++;
     if (energy > 100) energy = 100;
-    divEnergyText.innerText = energy.toString();
-    divEnergyArr[99-energy].style.visibility = 'visible';
-  }
+  };
+
+  this.update = function() {debugger;
+    if (spacePressed) {
+      if (usingEnergy) {
+        energy--;
+        if (energy == 0) {
+          usingEnergy = false;
+          SPEED = SPEED_ORIGINAL;
+        }
+      }
+      else if (energy < 10) {
+        return;
+      }
+      else {
+        usingEnergy = true;
+        SPEED = 2.0;
+      }
+    }
+    else {
+      if (usingEnergy) {
+        usingEnergy = false;
+        SPEED = SPEED_ORIGINAL;
+      }
+    }
+  };
+
+  var spacePressed = false;
+  this.onKeyDown = function (event) {
+    switch (event.keyCode) {
+      case 32: // space
+        spacePressed = true;
+    }
+  };
+
+  this.onKeyUp = function (event) {
+    switch (event.keyCode) {
+      case 32: // space
+        spacePressed = false;
+    }
+  };
 };

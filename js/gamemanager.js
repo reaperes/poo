@@ -10,10 +10,8 @@ GameManager = function (game) {
 
   var energy = new Energy();
 
-  var item = 3;
-  var isSpeedChanging = false;
-
   this.update = function () {
+    energy.update();
     hero.update();
     for (var i=0; i<pooCount; i++) poos[i].update();
     if (isCollision()) {
@@ -22,6 +20,7 @@ GameManager = function (game) {
   };
 
   this.render = function (context) {
+    energy.render();
     hero.render(context);
     for (var i=0; i<pooCount; i++) poos[i].render(context);
   };
@@ -43,27 +42,13 @@ GameManager = function (game) {
     pooCount++;
   };
 
-  function triggerSpeedChange() {
-    if (item == 0 || isSpeedChanging) return;
-    isSpeedChanging = true;
-    item--;
-    SPEED -= 5;
-    setTimeout(function() {
-      SPEED += 5;
-      isSpeedChanging = false;
-    }, 3000);
-  }
-
   this.onKeyDown = function (event) {
-    switch(event.keyCode) {
-      case 32: // space
-        triggerSpeedChange();
-        break;
-    }
+    energy.onKeyDown(event);
     hero.onKeyDown(event);
   };
 
   this.onKeyUp = function (event) {
+    energy.onKeyUp(event);
     hero.onKeyUp(event);
   };
 };
