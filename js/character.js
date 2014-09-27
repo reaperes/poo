@@ -64,5 +64,5 @@ Character = function () {
         rightKeyPressed = false;
         break;
     }
-  }
+  };
 };

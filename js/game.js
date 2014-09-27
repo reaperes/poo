@@ -94,6 +94,26 @@ Game = function () {
   }
   debugLoop.bind(this);
 
-  window.addEventListener('keydown', hero.onKeyDown, true);
-  window.addEventListener('keyup', hero.onKeyUp, true);
+  /**
+   * Keyboard controller
+   */
+
+  var onKeyDown = function (event) {
+    switch(event.keyCode) {
+      case 38: // up
+        SPEED += 1;
+        break;
+      case 40: // down
+        SPEED -= 1;
+        break;
+    }
+    hero.onKeyDown(event);
+  };
+
+  var onKeyUp = function (event) {
+    hero.onKeyUp(event);
+  };
+
+  window.addEventListener('keydown', onKeyDown, true);
+  window.addEventListener('keyup', onKeyUp, true);
 };
