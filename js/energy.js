@@ -1,5 +1,5 @@
 Energy = function () {
-  var energy = 20;
+  var energy = 0;
   var usingEnergy = false;
   var restoring = false;
 
