@@ -1,4 +1,4 @@
-Poo = function () {
+Poo = function (game) {
   this.x = Math.floor(Math.random() * (window.innerWidth - 27));
   this.y = - Math.floor(Math.random() * 100) - 27;
   var img = new Image();
@@ -7,6 +7,7 @@ Poo = function () {
   this.update = function () {
     this.y += 10;
     if (this.y > window.innerHeight) {
+      game.scoreboard.countUp(1);
       this.x = Math.floor(Math.random() * (window.innerWidth - 27));
       this.y = - Math.floor(Math.random() * 100) - 27;
     }

@@ -7,8 +7,10 @@ Game = function () {
   var hero = new Character();
   var poos = new Array(10);
   for (var i=0; i<10; i++) {
-    poos[i] = new Poo();
+    poos[i] = new Poo(this);
   }
+  this.scoreboard = new Scoreboard();
+
   var loopStop = false;
 
   this.init = function () {
