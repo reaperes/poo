@@ -8,6 +8,8 @@ GameManager = function (game) {
     poos[i] = new Poo(this);
   }
 
+  var energy = new Energy();
+
   var item = 3;
   var isSpeedChanging = false;
 
@@ -35,6 +37,8 @@ GameManager = function (game) {
   }
 
   this.onPooDropped = function () {
+    energy.increase();
+
     if (pooCount == MAX_POO_COUNT) return ;
     pooCount++;
   };
