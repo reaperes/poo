@@ -1,6 +1,4 @@
 GameManager = function (game) {
-  var self = this;
-
   this.scoreboard = new Scoreboard();
   var hero = new Character();
 
@@ -50,7 +48,7 @@ GameManager = function (game) {
       SPEED += 5;
       isSpeedChanging = false;
     }, 3000);
-  };
+  }
 
   this.onKeyDown = function (event) {
     switch(event.keyCode) {
