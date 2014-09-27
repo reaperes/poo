@@ -13,7 +13,7 @@ Character = function () {
   };
 
   this.render = function (context) {
-    context.drawImage(img, this.x, window.innerHeight-28);
+    context.drawImage(img, this.x, 572);
   };
 
   var move = function () {
@@ -33,9 +33,9 @@ Character = function () {
     if (_this.x < 0) {
       _this.x = velocity = acceleration = 0;
     }
-    if (_this.x > window.innerWidth - 15) {
+    if (_this.x > 985) {
       velocity = acceleration = 0;
-      _this.x = window.innerWidth - 15;
+      _this.x = 985;
     }
   };
 
