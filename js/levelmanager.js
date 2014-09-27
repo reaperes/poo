@@ -1,6 +1,6 @@
 LevelManager = function (game) {
   this.onPooDropped = function () {
-    if (game.pooCount == 40) return ;
+    if (game.pooCount == MAX_POO_COUNT) return ;
     game.pooCount++;
   }
 };

@@ -1,3 +1,5 @@
+MAX_POO_COUNT = 30;
+
 Game = function () {
   var isDebug = true;
 
@@ -10,8 +12,8 @@ Game = function () {
 
   var hero = new Character();
   this.pooCount = 1;
-  var poos = new Array(40);
-  for (var i=0; i<40; i++) {
+  var poos = new Array(MAX_POO_COUNT);
+  for (var i=0; i<MAX_POO_COUNT; i++) {
     poos[i] = new Poo(this);
   }
   this.scoreboard = new Scoreboard();
