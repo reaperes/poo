@@ -1,5 +1,5 @@
 GameManager = function (game) {
-  this.scoreboard = new Scoreboard();
+  var scoreboard = new Scoreboard();
   var hero = new Character();
 
   var pooCount = 1;
@@ -20,6 +20,7 @@ GameManager = function (game) {
   };
 
   this.render = function (context) {
+    scoreboard.render();
     energy.render();
     hero.render(context);
     for (var i=0; i<pooCount; i++) poos[i].render(context);
@@ -36,6 +37,7 @@ GameManager = function (game) {
   }
 
   this.onPooDropped = function () {
+    scoreboard.countUp(1);
     energy.increase();
 
     if (pooCount == MAX_POO_COUNT) return ;

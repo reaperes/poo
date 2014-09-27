@@ -1,4 +1,5 @@
 Scoreboard = function() {
+  var score = 0;
   var div = document.createElement('div');
   div.id = 'count';
   div.style.position = 'fixed';
@@ -15,7 +16,11 @@ Scoreboard = function() {
   div.innerText = 0;
   document.body.appendChild(div);
 
+  this.render = function () {
+    div.innerText = score.toString();
+  };
+
   this.countUp = function (count) {
-    div.innerText = parseInt(div.innerText) + count;
+    score += count;
   }
 };
