@@ -1,4 +1,5 @@
 GameManager = function (game) {
+  var item = 3;
   var isSpeedChanging = false;
 
   this.update = function () {
@@ -10,9 +11,9 @@ GameManager = function (game) {
   };
 
   this.triggerSpeedChange = function () {
-    if (isSpeedChanging) return;
-    console.log('time');
+    if (item == 0 || isSpeedChanging) return;
     isSpeedChanging = true;
+    item--;
     SPEED -= 5;
     setTimeout(function() {
       SPEED += 5;
