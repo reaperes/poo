@@ -1,8 +1,26 @@
 GameManager = function (game) {
+  var self = this;
+
+  this.hero = new Character();
+
+
+
+
+
+
+
+
+
+
   var item = 3;
   var isSpeedChanging = false;
 
   this.update = function () {
+    self.hero.update();
+  };
+
+  this.render = function (context) {
+    self.hero.render(context);
   };
 
   this.onPooDropped = function () {

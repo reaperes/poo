@@ -14,7 +14,6 @@ Game = function () {
 
   this.scoreboard = new Scoreboard();
 
-  var hero = new Character();
   this.pooCount = MAX_POO_COUNT;
   var poos = new Array(MAX_POO_COUNT);
   for (var i=0; i<MAX_POO_COUNT; i++) {
@@ -31,15 +30,14 @@ Game = function () {
   function update() {
     gameManager.update();
     for (var i=0; i<self.pooCount; i++) poos[i].update();
-    hero.update();
     if (isCollision()) {
       loopStop = true;
     }
   }
 
   function render() {
+    gameManager.render(context);
     for (var i=0; i<self.pooCount; i++) poos[i].render(context);
-    hero.render(context);
   }
 
   /**
@@ -49,8 +47,8 @@ Game = function () {
   function isCollision() {
     for (var i=0; i<self.pooCount; i++) {
       if (poos[i].y + 23 < window.innerHeight - 27) continue;
-      if (poos[i].x + 27 < hero.x) continue;
-      if (hero.x + 15 < poos[i].x) continue;
+      if (poos[i].x + 27 < gameManager.hero.x) continue;
+      if (gameManager.hero.x + 15 < poos[i].x) continue;
       return true;
     }
     return false;
@@ -90,7 +88,8 @@ Game = function () {
   }
   loop.bind(this);
 
-  function debugLoop() {console.log('speed: ' + SPEED + ', poo: ' + self.pooCount);
+  function debugLoop() {
+    console.log('speed: ' + SPEED + ', poo: ' + self.pooCount);
     if (loopStop) return;
     stats.begin();
     clear();
@@ -111,14 +110,13 @@ Game = function () {
         gameManager.triggerSpeedChange();
         break;
     }
-    hero.onKeyDown(event);
+    gameManager.hero.onKeyDown(event);
   };
 
   if (isDebug) {
     onKeyDown = function (event) {
       switch(event.keyCode) {
         case 32: // space
-          console.log('hello');
           gameManager.triggerSpeedChange();
           break;
         case 38: // up
@@ -128,12 +126,12 @@ Game = function () {
           SPEED -= 1;
           break;
       }
-      hero.onKeyDown(event);
+      gameManager.hero.onKeyDown(event);
     };
   }
 
   var onKeyUp = function (event) {
-    hero.onKeyUp(event);
+    gameManager.hero.onKeyUp(event);
   };
 
   window.addEventListener('keydown', onKeyDown, true);
