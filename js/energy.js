@@ -1,7 +1,7 @@
 Energy = function () {
-  var energy = 0;
+  var energy = 20;
   var usingEnergy = false;
-  var divEnergyArr = [];
+  var restoring = false;
 
   var divEnergy = document.createElement('div');
   divEnergy.style.cssText = 'position:fixed;left:18px;top:80px;display:block;opacity:0.9;';
@@ -33,29 +33,31 @@ Energy = function () {
     if (energy > 100) energy = 100;
   };
 
-  this.update = function() {debugger;
+  function restoreSpeed() {
+    if (SPEED >= SPEED_ORIGINAL) {
+      usingEnergy = false;
+      restoring = false;
+      return;
+    }
+    restoring = true;
+    SPEED += 1;
+    setTimeout(restoreSpeed, 200);
+  }
+
+  this.update = function() {
+    if (restoring) return ;
     if (spacePressed) {
-      if (usingEnergy) {
-        energy--;
-        if (energy == 0) {
-          usingEnergy = false;
-          SPEED = SPEED_ORIGINAL;
-        }
-      }
-      else if (energy < 10) {
-        return;
-      }
-      else {
+      if (usingEnergy && --energy == 0)
+        restoreSpeed();
+      else if (energy > 10) {
+        energy -= 5;
         usingEnergy = true;
-        SPEED = 2.0;
+        SPEED = 2.5;
       }
     }
-    else {
-      if (usingEnergy) {
-        usingEnergy = false;
-        SPEED = SPEED_ORIGINAL;
-      }
-    }
+    else
+      if (usingEnergy)
+        restoreSpeed();
   };
 
   var spacePressed = false;
@@ -63,6 +65,7 @@ Energy = function () {
     switch (event.keyCode) {
       case 32: // space
         spacePressed = true;
+        break;
     }
   };
 
@@ -70,6 +73,7 @@ Energy = function () {
     switch (event.keyCode) {
       case 32: // space
         spacePressed = false;
+        break;
     }
   };
 };
