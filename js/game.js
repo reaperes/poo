@@ -1,3 +1,4 @@
+SPEED = 10.0;
 MAX_POO_COUNT = 30;
 
 Game = function () {
@@ -43,7 +44,6 @@ Game = function () {
       if (poos[i].y + 23 < window.innerHeight - 27) continue;
       if (poos[i].x + 27 < hero.x) continue;
       if (hero.x + 15 < poos[i].x) continue;
-      console.error(self.pooCount);
       return true;
     }
     return false;
@@ -79,8 +79,9 @@ Game = function () {
     clear();
     update();
     render();
-    requestAnimationFrame(loop, canvas);
+    requestAnimationFrame(loop.bind(this), canvas);
   }
+  loop.bind(this);
 
   function debugLoop() {
     if (loopStop) return;
@@ -89,8 +90,9 @@ Game = function () {
     update();
     render();
     stats.end();
-    requestAnimationFrame(debugLoop, canvas);
+    requestAnimationFrame(debugLoop.bind(this), canvas);
   }
+  debugLoop.bind(this);
 
   window.addEventListener('keydown', hero.onKeyDown, true);
   window.addEventListener('keyup', hero.onKeyUp, true);
