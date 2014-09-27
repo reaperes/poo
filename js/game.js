@@ -12,12 +12,10 @@ Game = function () {
 
   var gameManager = new GameManager(this);
 
-  this.scoreboard = new Scoreboard();
-
-  this.pooCount = MAX_POO_COUNT;
+  this.pooCount = 1;
   var poos = new Array(MAX_POO_COUNT);
   for (var i=0; i<MAX_POO_COUNT; i++) {
-    poos[i] = new Poo(this);
+    poos[i] = new Poo(gameManager);
   }
 
   /**
@@ -53,10 +51,6 @@ Game = function () {
     }
     return false;
   }
-
-  this.onPooDropped = function () {
-    gameManager.onPooDropped();
-  };
 
   /**
    * Render functions

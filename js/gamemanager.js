@@ -1,6 +1,7 @@
 GameManager = function (game) {
   var self = this;
 
+  this.scoreboard = new Scoreboard();
   this.hero = new Character();
 
 
