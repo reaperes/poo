@@ -28,7 +28,7 @@ GameManager = function (game) {
 
   function isCollision() {
     for (var i=0; i<pooCount; i++) {
-      if (poos[i].y + 23 < window.innerHeight - 27) continue;
+      if (poos[i].y + 23 < 573) continue;
       if (poos[i].x + 27 < hero.x) continue;
       if (hero.x + 15 < poos[i].x) continue;
       return true;
