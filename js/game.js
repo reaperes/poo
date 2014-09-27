@@ -1,5 +1,6 @@
-SPEED = 10.0;
 MAX_POO_COUNT = 30;
+
+SPEED = 10.0;
 
 Game = function () {
   var isDebug = true;
@@ -9,20 +10,26 @@ Game = function () {
   var canvas = document.getElementById('canvas');
   var context = canvas.getContext('2d');
 
-  var levelManager = new LevelManager(this);
+  var gameManager = new GameManager(this);
+
+  this.scoreboard = new Scoreboard();
 
   var hero = new Character();
-  this.pooCount = 1;
+  this.pooCount = MAX_POO_COUNT;
   var poos = new Array(MAX_POO_COUNT);
   for (var i=0; i<MAX_POO_COUNT; i++) {
     poos[i] = new Poo(this);
   }
-  this.scoreboard = new Scoreboard();
+
+  /**
+   * Core functions
+   */
 
   this.init = function () {
   };
 
   function update() {
+    gameManager.update();
     for (var i=0; i<self.pooCount; i++) poos[i].update();
     hero.update();
     if (isCollision()) {
@@ -50,7 +57,7 @@ Game = function () {
   }
 
   this.onPooDropped = function () {
-    levelManager.onPooDropped();
+    gameManager.onPooDropped();
   };
 
   /**
@@ -83,7 +90,7 @@ Game = function () {
   }
   loop.bind(this);
 
-  function debugLoop() {
+  function debugLoop() {console.log('speed: ' + SPEED + ', poo: ' + self.pooCount);
     if (loopStop) return;
     stats.begin();
     clear();
@@ -100,15 +107,30 @@ Game = function () {
 
   var onKeyDown = function (event) {
     switch(event.keyCode) {
-      case 38: // up
-        SPEED += 1;
-        break;
-      case 40: // down
-        SPEED -= 1;
+      case 32: // space
+        gameManager.triggerSpeedChange();
         break;
     }
     hero.onKeyDown(event);
   };
+
+  if (isDebug) {
+    onKeyDown = function (event) {
+      switch(event.keyCode) {
+        case 32: // space
+          console.log('hello');
+          gameManager.triggerSpeedChange();
+          break;
+        case 38: // up
+          SPEED += 1;
+          break;
+        case 40: // down
+          SPEED -= 1;
+          break;
+      }
+      hero.onKeyDown(event);
+    };
+  }
 
   var onKeyUp = function (event) {
     hero.onKeyUp(event);
