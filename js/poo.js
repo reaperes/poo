@@ -6,7 +6,7 @@ Poo = function (gameManager) {
 
   this.update = function () {
     this.y += SPEED;
-    if (this.y > window.innerHeight) {
+    if (this.y > 600) {
       this.x = Math.floor(Math.random() * 983);
       this.y = - Math.floor(Math.random() * 100) - 26.9;
       gameManager.onPooDropped();
