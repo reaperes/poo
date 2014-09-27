@@ -1,6 +1,6 @@
 Poo = function (game) {
   this.x = Math.floor(Math.random() * (window.innerWidth - 27));
-  this.y = - Math.floor(Math.random() * 100) - 27;
+  this.y = - Math.floor(Math.random() * 400) - 27;
   var img = new Image();
   img.src = 'images/poo_27x23.png';
 
@@ -10,6 +10,7 @@ Poo = function (game) {
       game.scoreboard.countUp(1);
       this.x = Math.floor(Math.random() * (window.innerWidth - 27));
       this.y = - Math.floor(Math.random() * 100) - 27;
+      game.onPooDropped();
     }
   };
 

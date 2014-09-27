@@ -1,12 +1,17 @@
 Game = function () {
   var isDebug = true;
 
+  var self = this;
+
   var canvas = document.getElementById('canvas');
   var context = canvas.getContext('2d');
 
+  var levelManager = new LevelManager(this);
+
   var hero = new Character();
-  var poos = new Array(10);
-  for (var i=0; i<10; i++) {
+  this.pooCount = 1;
+  var poos = new Array(40);
+  for (var i=0; i<40; i++) {
     poos[i] = new Poo(this);
   }
   this.scoreboard = new Scoreboard();
@@ -15,7 +20,7 @@ Game = function () {
   };
 
   function update() {
-    for (var i=0; i<poos.length; i++) poos[i].update();
+    for (var i=0; i<self.pooCount; i++) poos[i].update();
     hero.update();
     if (isCollision()) {
       loopStop = true;
@@ -23,7 +28,7 @@ Game = function () {
   }
 
   function render() {
-    for (var i=0; i<poos.length; i++) poos[i].render(context);
+    for (var i=0; i<self.pooCount; i++) poos[i].render(context);
     hero.render(context);
   }
 
@@ -32,15 +37,19 @@ Game = function () {
    */
 
   function isCollision() {
-    for (var i=0; i<poos.length; i++) {
+    for (var i=0; i<self.pooCount; i++) {
       if (poos[i].y + 23 < window.innerHeight - 27) continue;
       if (poos[i].x + 27 < hero.x) continue;
       if (hero.x + 15 < poos[i].x) continue;
-      console.log(poos[i].x + ' ' + hero.x);
+      console.error(self.pooCount);
       return true;
     }
     return false;
   }
+
+  this.onPooDropped = function () {
+    levelManager.onPooDropped();
+  };
 
   /**
    * Render functions
@@ -60,7 +69,6 @@ Game = function () {
     stats.domElement.style.left = '0px';
     stats.domElement.style.top = '0px';
     document.body.appendChild(stats.domElement);
-
     this.run = debugLoop;
   }
 
