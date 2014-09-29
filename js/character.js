@@ -19,8 +19,8 @@ Character = function () {
   var move = function () {
     if (leftKeyPressed ^ rightKeyPressed) {
       // apply acceleration
-      if (leftKeyPressed) acceleration = - SPEED / 50;
-      else acceleration = SPEED / 50;
+      if (leftKeyPressed) acceleration = - SPEED / 25;
+      else acceleration = SPEED / 25;
     }
     else {
       // apply friction
@@ -28,7 +28,9 @@ Character = function () {
       else if (velocity < - SPEED / 16) acceleration = SPEED / 25;
       else {acceleration = 0;velocity = 0;}
     }
+
     velocity += acceleration;
+
     _this.x += velocity;
     if (_this.x < 0) {
       _this.x = velocity = acceleration = 0;
